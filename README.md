@@ -1,216 +1,91 @@
-# Create T3 App
+# Teste Estagiário / Júnior Spaceship
 
-This is an app bootstrapped according to the [init.tips](https://init.tips) stack, also known as the T3-Stack.
+Bem vindo ao teste da Spaceship Foundation! O exame a seguir foi criado pra avaliar sua habilidade de aprender a utilizar nossa stack, incluindo buscar conhecimento, conforto em fazer perguntas e identificar as partes importantes do código.
 
-## Why are there `.js` files in here?
+## Stack
 
-As per [T3-Axiom #3](https://github.com/t3-oss/create-t3-app/tree/next#3-typesafety-isnt-optional), we take typesafety as a first class citizen. Unfortunately, not all frameworks and plugins support TypeScript which means some of the configuration files have to be `.js` files.
+A stack que utilizamos é chamada [T3 Stack](https://create.t3.gg/), uma stack focada e integrada através de TypeScript garantindo iterações rápidas e facilidade de onboarding. Os principais pontos são:
 
-We try to emphasize that these files are javascript for a reason, by explicitly declaring its type (`cjs` or `mjs`) depending on what's supported by the library it is used by. Also, all the `js` files in this project are still typechecked using a `@ts-check` comment at the top.
+- [TypeScript](https://www.typescriptlang.org/)
+   
+  Fundamento de qualquer desenvolvimento moderno Web/NodeJS. Aprimora o JavaScript tradicional ao trazer tipagem a linguagem.
 
-## What's next? How do I make an app with this?
+- [Next JS](https://nextjs.org/)
 
-We try to keep this project as simple as possible, so you can start with the most basic configuration and then move on to more advanced configuration.
+  Framework que traz React para o Server. Habilita renderização no servidor melhorando SEO, geração estática de páginas e facilita roteamento entre páginas
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- [Prisma](https://www.prisma.io/)
 
-- [Next-Auth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [TailwindCSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io) (using @next version? [see v10 docs here](https://alpha.trpc.io))
+  ORM focada em TypeScript. Gera tipagem após alterações no Schema, gerencia mutações e fornece uma API simplificada para Read e Write no banco de dados
 
-Also checkout these awesome tutorials on `create-t3-app`.
+- [Tailwind CSS](https://tailwindcss.com/)
 
-- [Build a Blog With the T3 Stack - tRPC, TypeScript, Next.js, Prisma & Zod](https://www.youtube.com/watch?v=syEWlxVFUrY)
-- [Build a Live Chat Application with the T3 Stack - TypeScript, Tailwind, tRPC](https://www.youtube.com/watch?v=dXRRY37MPuk)
-- [Build a full stack app with create-t3-app](https://www.nexxel.dev/blog/ct3a-guestbook)
-- [A first look at create-t3-app](https://dev.to/ajcwebdev/a-first-look-at-create-t3-app-1i8f)
+  Pacote de estilização através de classes de utilidade. Fornece um padrão de design atrativo além de customização para layouts responsivos
 
-## How do I deploy this?
+- [tRPC](https://trpc.io/)
 
-### Vercel
+  Pacote de criação de APIs que garante a integridade de tipos do back ao front-end, além de facilidade de desenvolvimento
 
-We recommend deploying to [Vercel](https://vercel.com/?utm_source=t3-oss&utm_campaign=oss). It makes it super easy to deploy NextJs apps.
+## Execução do projeto
 
-- Push your code to a GitHub repository.
-- Go to [Vercel](https://vercel.com/?utm_source=t3-oss&utm_campaign=oss) and sign up with GitHub.
-- Create a Project and import the repository you pushed your code to.
-- Add your environment variables.
-- Click **Deploy**
-- Now whenever you push a change to your repository, Vercel will automatically redeploy your website!
+Para executar o projeto primeiramente execute `npm install` ou `yarn install`, caso tenha yarn instalado. Após a instalação das dependências o banco de dados local será migrado automaticamente e os dados iniciais (seed) serão criados.
 
-### Docker
+Para executar o servidor utilize o comando `npm run dev` ou `yarn dev`. O projeto estará disponível em `http://localhost:3000`
 
-You can also dockerize this stack and deploy a container.
+## Estrutura
 
-Please note that Next.js requires a different process for buildtime (available in the frontend, prefixed by `NEXT_PUBLIC`) and runtime environment, server-side only, variables. In this demo we are using two variables, `NEXT_PUBLIC_FOO` and `BAR`. Pay attention to their positions in the `Dockerfile`, command-line arguments, and `docker-compose.yml`.
+- Páginas web
+  
+  Todas as paginas web estão sob `src/pages` dado o padrão do NextJs
 
-1. In your [next.config.mjs](./next.config.mjs), add the `standalone` output-option to your config:
+- Servidor tRPC
 
-   ```diff
-     export default defineNextConfig({
-       reactStrictMode: true,
-       swcMinify: true,
-   +   output: "standalone",
-     });
-   ```
+  Todas as rotas (chamadas de API) do tRPC estão localizadas em `src/server/router`. Para este teste você precisara fazer algumas alterações no arquivo `src/server/router/todos.ts`
 
-2. Remove the `env`-import from [next.config.mjs](./next.config.mjs):
+- Schema do banco de dados
+  
+  Todos os arquivos relevantes ao Prisma estao na pasta `prisma`. Isso inclui o Schema (mapeamento de tabelas e relações) e o arquivo sqlite (banco local)
+## Tarefas
 
-   ```diff
-   - import { env } from "./src/env/server.mjs";
-   ```
+Abaixo estão as tarefas que você deve executar, em ordem de prioridade
 
-3. Create a `.dockerignore` file with the following contents:
-   <details>
-   <summary>.dockerignore</summary>
+1. Deixar a lista de TODOs responsiva.
 
-   ```
-   .env
-   Dockerfile
-   .dockerignore
-   node_modules
-   npm-debug.log
-   README.md
-   .next
-   .git
-   ```
+    Utilizando Flex Box, faça com que a lista de TODOs suporte mais de um item horizontalmente quando em telas largas dinamicamente.
 
-  </details>
+    Arquivo relevante: `src/pages/index.tsx`
 
-4. Create a `Dockerfile` with the following contents:
-   <details>
-   <summary>Dockerfile</summary>
+2. Detalhe de todo
 
-   ```Dockerfile
-   ########################
-   #         DEPS         #
-   ########################
+    Ao clicar em um item da lista você é redirecionado a uma página específica daquele item. 
 
-   # Install dependencies only when needed
-   # TODO: re-evaluate if emulation is still necessary on arm64 after moving to node 18
-   FROM --platform=linux/amd64 node:16-alpine AS deps
-   # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-   RUN apk add --no-cache libc6-compat
-   WORKDIR /app
+    Esta pagina ainda não puxa os dados do item de forma correta do banco de dados. Você precisará implementar a chamada no backend para encontrar um item por seu ID que é utilizada no frontend, e fazer com que a página exiba os dados retornados.
 
-   # Install dependencies based on the preferred package manager
-   COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-   RUN \
-     if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-     elif [ -f package-lock.json ]; then npm ci; \
-     elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i; \
-     else echo "Lockfile not found." && exit 1; \
-     fi
+    Arquivos relevantes:
+    - `src/server/router/todos.ts`
+    - `src/pages/todo/[id].tsx`
 
-   ########################
-   #        BUILDER       #
-   ########################
+3. Formulário de criar novo item
 
-   # Rebuild the source code only when needed
-   # TODO: re-evaluate if emulation is still necessary on arm64 after moving to node 18
-   FROM --platform=linux/amd64 node:16-alpine AS builder
+    O formulário da página principal deve conter todos os campos necessários para criação de um TODO, além de fazer a chamada correta de banco de dados. 
+    
+    Para isso, adicione um campo `description` (textarea) utilizando o campo `title` de referência. Depois crie a chamada no backend que executa a criação de um novo item.
 
-   ARG NEXT_PUBLIC_FOO
-   ARG BAR
+    Arquivos relevantes:
+    - `src/pages/index.tsx`
+    - `src/server/router/todos.ts`
+    - https://react-hook-form.com/
 
-   WORKDIR /app
-   COPY --from=deps /app/node_modules ./node_modules
-   COPY . .
+4. Estilização do formulário
 
-   # Next.js collects completely anonymous telemetry data about general usage.
-   # Learn more here: https://nextjs.org/telemetry
-   # Uncomment the following line in case you want to disable telemetry during the build.
-   # ENV NEXT_TELEMETRY_DISABLED 1
+    Adicione estilos aos campos e botão do formulário de forma que fique de acordo com o [design neste Figma](https://www.figma.com/file/Ie30m2tZq2pcDhEfyIcUfD/Xhibiter.1.0?node-id=1090%3A14836). 
+    
+    Estilos de interação como mudar a cor da borda ao selecionar e mudança do botão ao passar o mouse por cima não são obrigatórios mas interessante. Não precisa preocupar com a fonte
 
-   RUN \
-     if [ -f yarn.lock ]; then yarn build; \
-     elif [ -f package-lock.json ]; then npm run build; \
-     elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm run build; \
-     else echo "Lockfile not found." && exit 1; \
-     fi
+5. Excluir um TODO
 
-   ########################
-   #        RUNNER        #
-   ########################
+    **Este item requer que você execute tudo que aprendeu das tarefas acima.**
 
-   # Production image, copy all the files and run next
-   # TODO: re-evaluate if emulation is still necessary after moving to node 18
-   FROM --platform=linux/amd64 node:16-alpine AS runner
-   # WORKDIR /usr/app
-   WORKDIR /app
+    O botão de deletar um TODO existe mas não possui funcionalidade.
 
-   ENV NODE_ENV production
-   # Uncomment the following line in case you want to disable telemetry during runtime.
-   # ENV NEXT_TELEMETRY_DISABLED 1
-
-   RUN addgroup --system --gid 1001 nodejs
-   RUN adduser --system --uid 1001 nextjs
-
-   COPY --from=builder /app/next.config.mjs ./
-   COPY --from=builder /app/public ./public
-   COPY --from=builder /app/package.json ./package.json
-
-   # Automatically leverage output traces to reduce image size
-   # https://nextjs.org/docs/advanced-features/output-file-tracing
-   COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-   COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-   USER nextjs
-
-   EXPOSE 3000
-
-   ENV PORT 3000
-
-   CMD ["node", "server.js"]
-   ```
-
-  </details>
-
-5. To build and run this image locally, run:
-
-   ```bash
-   docker build -t ct3a -e NEXT_PUBLIC_FOO=foo .
-   docker run -p 3000:3000 -e BAR="bar" ct3a
-   ```
-
-6. You can also use a PaaS such as [Railway's](https://railway.app) automated [Dockerfile deployments](https://docs.railway.app/deploy/dockerfiles) to deploy your app.
-
-### docker-compose
-
-You can also use docker-compose to build and run the container.
-
-1. Follow steps 1-4 above
-
-2. Create a `docker-compose.yml` file with the following:
-
-   <details>
-   <summary>docker-compose.yml</summary>
-
-   ```yaml
-   version: "3.7"
-   services:
-     app:
-       platform: "linux/amd64"
-       build:
-         context: .
-         dockerfile: Dockerfile
-         args:
-           NEXT_PUBLIC_FOO: "foo"
-       working_dir: /app
-       ports:
-         - "3000:3000"
-       image: t3-app
-       environment:
-         - BAR=bar
-   ```
-
-   </details>
-
-3. Run this using `docker-compose up`.
-
-## Useful resources
-
-Here are some resources that we commonly refer to:
-
-- [Protecting routes with Next-Auth.js](https://next-auth.js.org/configuration/nextjs#unstable_getserversession)
+    Crie a chamada de backend para deletar o item e chame o hook correto no frontend pra que ela seja executada quando clicar um botão. A chamada deve deletar o todo correto, por seu ID.

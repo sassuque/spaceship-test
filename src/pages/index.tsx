@@ -47,7 +47,12 @@ const Home: NextPage = () => {
                 <label htmlFor="title">
                   <span>Title</span>
                 </label>
-                <input type="text" {...register("title")} />
+                <input
+                  type="text"
+                  {...register("title", {
+                    required: true,
+                  })}
+                />
               </div>
               <button type="submit">Create</button>
             </form>
