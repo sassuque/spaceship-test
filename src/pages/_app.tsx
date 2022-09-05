@@ -29,8 +29,7 @@ export default withTRPC<AppRouter>({
       links: [
         loggerLink({
           enabled: (opts) =>
-            process.env.NODE_ENV === "development" ||
-            (opts.direction === "down" && opts.result instanceof Error),
+            opts.direction === "down" && opts.result instanceof Error,
         }),
         httpBatchLink({ url }),
       ],
@@ -45,5 +44,5 @@ export default withTRPC<AppRouter>({
   /**
    * @link https://trpc.io/docs/ssr
    */
-  ssr: false,
+  ssr: true,
 })(MyApp);

@@ -23,4 +23,15 @@ export const todoRouter = createRouter()
     async resolve({ ctx, input }) {
       return null;
     },
+  })
+  .mutation("update", {
+    input: z.object({
+      id: z.number(),
+      title: z.string(),
+      description: z.string(),
+      done: z.boolean().default(false),
+    }),
+    async resolve({ ctx, input }) {
+      return null;
+    },
   });
