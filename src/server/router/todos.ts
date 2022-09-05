@@ -4,34 +4,29 @@ import { createRouter } from "./context";
 export const todoRouter = createRouter()
   .query("getAll", {
     async resolve({ ctx }) {
-      return await ctx.prisma.todo.findMany();
+      return await ctx.prisma.todo.findMany({
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
     },
   })
   .query("get", {
     input: z.object({
-      id: z.number().optional(),
+      id: z.number(),
     }),
     async resolve({ ctx, input }) {
-      return undefined;
+      // Buscar um TODO por sua primaryKey
+      return null;
     },
   })
   .mutation("create", {
     input: z.object({
-      title: z.string(),
-      description: z.string(),
+      // title: ???,
+      // description: ???,
     }),
     async resolve({ ctx, input }) {
-      return null;
-    },
-  })
-  .mutation("update", {
-    input: z.object({
-      id: z.number(),
-      title: z.string(),
-      description: z.string(),
-      done: z.boolean().default(false),
-    }),
-    async resolve({ ctx, input }) {
+      // Criar um TODO
       return null;
     },
   });

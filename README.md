@@ -76,16 +76,16 @@ Abaixo estão as tarefas que você deve executar, em ordem de prioridade
     - `src/server/router/todos.ts`
     - https://react-hook-form.com/
 
-4. Estilização do formulário
-
-    Adicione estilos aos campos e botão do formulário de forma que fique de acordo com o [design neste Figma](https://www.figma.com/file/Ie30m2tZq2pcDhEfyIcUfD/Xhibiter.1.0?node-id=1090%3A14836). 
-    
-    Estilos de interação como mudar a cor da borda ao selecionar e mudança do botão ao passar o mouse por cima não são obrigatórios mas interessante. Não precisa preocupar com a fonte
-
-5. Excluir um TODO
+4. Excluir um TODO
 
     **Este item requer que você execute tudo que aprendeu das tarefas acima.**
 
     O botão de deletar um TODO existe mas não possui funcionalidade.
 
     Crie a chamada de backend para deletar o item e chame o hook correto no frontend pra que ela seja executada quando clicar um botão. A chamada deve deletar o todo correto, por seu ID.
+
+5. Estilização do formulário
+
+    Adicione estilos aos campos e botão do formulário de forma que fique de acordo com o [design neste Figma](https://www.figma.com/file/Ie30m2tZq2pcDhEfyIcUfD/Xhibiter.1.0?node-id=1090%3A14836). 
+    
+    Estilos de interação como mudar a cor da borda ao selecionar e mudança do botão ao passar o mouse por cima não são obrigatórios mas interessante. Não precisa preocupar com a fonte

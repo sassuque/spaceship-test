@@ -5,9 +5,16 @@ import Head from "next/head";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { trpc } from "../utils/trpc";
+import z from "zod";
+
+const todoValidator = z.object({
+  title: z.string(),
+  description: z.string(),
+});
 
 const Home: NextPage = () => {
   const { data, isLoading } = trpc.useQuery(["todos.getAll"]);
+  const { mutate } = trpc.useMutation("todos.create");
   const { handleSubmit, register } = useForm();
   return (
     <>
@@ -39,8 +46,9 @@ const Home: NextPage = () => {
             <h2>Create Todo</h2>
             <form
               onSubmit={handleSubmit((val) => {
+                const todo = todoValidator.parse(val);
                 // Should Create a Todo
-                console.log(val);
+                mutate(todo);
               })}
             >
               <div style={{ display: "flex", flexDirection: "column" }}>
@@ -54,6 +62,7 @@ const Home: NextPage = () => {
                   })}
                 />
               </div>
+              {/* Criar campo necessário */}
               <button type="submit">Create</button>
             </form>
           </div>

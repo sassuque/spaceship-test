@@ -3,7 +3,9 @@ import { trpc } from "../../utils/trpc";
 
 const Todo = () => {
   const { query } = useRouter();
-  const {} = trpc.useQuery(["todos.get", {}]);
+  const todoId = parseInt(query.id as string);
+  // Adequar chamada e dinamizar página
+  const { data } = trpc.useQuery(["todos.get", {}]);
   if (!query) return null;
   return (
     <div
