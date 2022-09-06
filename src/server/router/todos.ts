@@ -1,3 +1,4 @@
+import { resolve } from "path";
 import { title } from "process";
 import { z } from "zod";
 import { createRouter } from "./context";
@@ -17,13 +18,13 @@ export const todoRouter = createRouter()
       id: z.number(),
     }),
     async resolve({ ctx, input }) {
-     const teste = await ctx.prisma.todo.findUnique({
+     const user = await ctx.prisma.todo.findUnique({
         where: {
           id: input.id
         }
       })
       // Buscar um TODO por sua primaryKey
-      return teste;
+      return user;
     },
   })
   .mutation("create", {
@@ -43,4 +44,18 @@ export const todoRouter = createRouter()
       })
       return user;
     },
-  });
+  })
+
+  .mutation("delete", {
+    input: z.object({
+      id: z.number(),
+    }),
+    async resolve({ ctx, input}) {
+      const user = await ctx.prisma.todo.delete({
+        where: {
+          id: input.id
+        }
+      })
+      return "Delete User";
+    }
+  })

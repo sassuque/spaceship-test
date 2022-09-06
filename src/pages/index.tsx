@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { trpc } from "../utils/trpc";
 import z from "zod";
+import { KeyObject } from "crypto";
 
 const todoValidator = z.object({
   title: z.string(),
@@ -15,7 +16,9 @@ const todoValidator = z.object({
 const Home: NextPage = () => {
   const { data, isLoading } = trpc.useQuery(["todos.getAll"]);
   const { mutate } = trpc.useMutation("todos.create");
+  const { mutateAsync } = trpc.useMutation("todos.delete")
   const { handleSubmit, register } = useForm();
+
   return (
     <>
       <Head>
@@ -83,11 +86,8 @@ const Home: NextPage = () => {
           }}
         >
           <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 12,
-            }}
+          className="listapps"
+            
           >
             {isLoading && <div>Loading...</div>}
             {!isLoading && data && (
@@ -97,6 +97,7 @@ const Home: NextPage = () => {
                   return (
                     <div
                       key={todo.id}
+                      id = "1"
                       style={{
                         border: "1px solid grey",
                         padding: 16,
@@ -127,6 +128,7 @@ const Home: NextPage = () => {
                         </a>
                       </Link>
                       <div
+                      id = "teste"
                         style={{
                           position: "absolute",
                           right: 8,
@@ -146,7 +148,7 @@ const Home: NextPage = () => {
                             borderRadius: 6,
                             cursor: "pointer",
                           }}
-                        />
+                        />                        
                       </div>
                     </div>
                   );
