@@ -14,9 +14,9 @@ const todoValidator = z.object({
 });
 
 const Home: NextPage = () => {
-  const { data, isLoading } = trpc.useQuery(["todos.getAll"]);
-  const { mutate } = trpc.useMutation("todos.create");
-  const { mutateAsync } = trpc.useMutation("todos.delete")
+  const { data, isLoading, refetch } = trpc.useQuery(["todos.getAll"]);
+  const { mutate } = trpc.useMutation("todos.create", {onSuccess: () => {refetch()}});
+  const { mutate: delet } = trpc.useMutation("todos.delete", {onSuccess: () => {refetch()}});
   const { handleSubmit, register } = useForm();
 
   return (
@@ -126,6 +126,7 @@ const Home: NextPage = () => {
                         </a>
                       </Link>
                       <div
+                      onClick={() => {delet({id: todo.id})}}
                         style={{
                           position: "absolute",
                           right: 8,
