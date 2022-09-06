@@ -1,3 +1,4 @@
+import { title } from "process";
 import { z } from "zod";
 import { createRouter } from "./context";
 
@@ -28,10 +29,18 @@ export const todoRouter = createRouter()
   .mutation("create", {
     input: z.object({
       // title: ???,
+      title: z.string(),
       // description: ???,
+      description: z.string(),
     }),
     async resolve({ ctx, input }) {
       // Criar um TODO
-      return null;
+      const user = await ctx.prisma.todo.create({
+        data: {
+          title: input.title,
+          description: input.description,
+        }
+      })
+      return user;
     },
   });

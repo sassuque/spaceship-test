@@ -72,7 +72,7 @@ const Home: NextPage = () => {
                 />
               </div>
               {/* Criar campo necessário */}
-              <button type="submit">Create</button>
+              <button type="submit" >Create</button>
             </form>
           </div>
         </div>
