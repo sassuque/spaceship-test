@@ -5,7 +5,8 @@ const Todo = () => {
   const { query } = useRouter();
   const todoId = parseInt(query.id as string);
   // Adequar chamada e dinamizar página
-  const { data } = trpc.useQuery(["todos.get", {}]);
+  const { data } = trpc.useQuery(["todos.get", {id: todoId}]);
+  console.log(data)
   if (!query) return null;
   return (
     <div
@@ -17,12 +18,9 @@ const Todo = () => {
         paddingTop: 32,
       }}
     >
-      <h1>Todo Title</h1>
+      <h1>{data?.title}</h1>
       <p style={{ maxWidth: "80ch" }}>
-        Todo description Lorem ipsum dolor sit amet consectetur adipisicing
-        elit. Accusamus illum harum nobis perspiciatis? Iusto perferendis,
-        molestias, velit atque obcaecati qui vero placeat vitae soluta tenetur,
-        autem et reprehenderit deserunt veritatis?
+        {data?.description}
       </p>
     </div>
   );

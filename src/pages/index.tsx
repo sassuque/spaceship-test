@@ -61,6 +61,15 @@ const Home: NextPage = () => {
                     required: true,
                   })}
                 />
+                <label htmlFor="description">
+                  <span>Description</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("description", {
+                    required: true,
+                  })}
+                />
               </div>
               {/* Criar campo necessário */}
               <button type="submit">Create</button>

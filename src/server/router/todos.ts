@@ -16,8 +16,13 @@ export const todoRouter = createRouter()
       id: z.number(),
     }),
     async resolve({ ctx, input }) {
+     const teste = await ctx.prisma.todo.findUnique({
+        where: {
+          id: input.id
+        }
+      })
       // Buscar um TODO por sua primaryKey
-      return null;
+      return teste;
     },
   })
   .mutation("create", {
