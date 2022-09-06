@@ -59,6 +59,7 @@ const Home: NextPage = () => {
                   <span>Title</span>
                 </label>
                 <input
+                className="textInput"
                   type="text"
                   {...register("title", {
                     required: true,
@@ -68,6 +69,7 @@ const Home: NextPage = () => {
                   <span>Description</span>
                 </label>
                 <input
+                className="textInput"
                   type="text"
                   {...register("description", {
                     required: true,
@@ -75,7 +77,7 @@ const Home: NextPage = () => {
                 />
               </div>
               {/* Criar campo necessário */}
-              <button type="submit" >Create</button>
+              <button type="submit" className="button" >Create</button>
             </form>
           </div>
         </div>
@@ -85,10 +87,7 @@ const Home: NextPage = () => {
             padding: "0 24px",
           }}
         >
-          <div
-          className="listapps"
-            
-          >
+          <div className="listapps">
             {isLoading && <div>Loading...</div>}
             {!isLoading && data && (
               <>
@@ -97,7 +96,6 @@ const Home: NextPage = () => {
                   return (
                     <div
                       key={todo.id}
-                      id = "1"
                       style={{
                         border: "1px solid grey",
                         padding: 16,
@@ -128,7 +126,6 @@ const Home: NextPage = () => {
                         </a>
                       </Link>
                       <div
-                      id = "teste"
                         style={{
                           position: "absolute",
                           right: 8,

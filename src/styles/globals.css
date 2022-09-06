@@ -30,3 +30,34 @@ a {
     gap: 12;
   }
 }
+
+.button {
+  background: #E35600;
+  box-shadow: 5px 5px 10px
+   rgba(108, 106, 213, 0.25),
+    inset 2px 2px 6px #FF5722,
+     inset -5px -5px 10px #C1610B;
+  border-radius: 100px;
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+  display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 12px 32px;
+gap: 10px;
+}
+
+.textInput {
+  background: #FFFFFF;
+  border: 1px solid #E35600;
+  border-radius: 8px;
+  height: 40px;
+}
+
+.textInput2{
+  background: #FFFFFF;
+  border: 1px solid #E35600;
+  border-radius: 8px;
+  height: 100px;
+}
